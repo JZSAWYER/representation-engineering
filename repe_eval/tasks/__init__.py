@@ -4,6 +4,7 @@ from .race import race_dataset
 from .obqa import openbookqa_dataset
 from .arc import arc_dataset
 from .tqa import tqa_dataset
+from .easyedit import safeedit
 
 def task_dataset(task):
     datasets_function = {
@@ -13,6 +14,7 @@ def task_dataset(task):
         'arc_easy': partial(arc_dataset, 'ARC-Easy'),
         'arc_challenge': partial(arc_dataset, 'ARC-Challenge'),
         'tqa': tqa_dataset,
+        'safe': safeedit
     }
 
     assert task in datasets_function, f"{task} not implemented"
