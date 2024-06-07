@@ -18,10 +18,15 @@ def literary_openings_dataset(data_dir, ntrain=16, seed=0):
     test_data = data
 
     docs_train_labels = []
+    docs_test_labels = []
     for d in train_data:
         true_s = d[0]
         random.shuffle(d)
         docs_train_labels.append([s == true_s for s in d])
+    for d in test_data:
+        true_s = d[0]
+        random.shuffle(d)
+        docs_test_labels.append([s == true_s for s in d])
 
     train_data = np.concatenate(train_data).tolist()
     test_data = np.concatenate(test_data).tolist()
@@ -31,7 +36,7 @@ def literary_openings_dataset(data_dir, ntrain=16, seed=0):
 
     docs_train_data = [template_str.format(s=s) for s in train_data]
     docs_test_data = [template_str.format(s=s) for s in test_data]
-    return docs_train_data, docs_train_labels, docs_test_data
+    return docs_train_data, docs_train_labels, docs_test_data, docs_test_labels
 
 def quotes_dataset(data_dir, ntrain=16, seed=0):
     random.seed(0)
@@ -47,10 +52,15 @@ def quotes_dataset(data_dir, ntrain=16, seed=0):
     test_data = data
 
     quote_train_labels = []
+    quote_test_labels = []
     for d in train_data:
         true_s = d[0]
         random.shuffle(d)
         quote_train_labels.append([s == true_s for s in d])
+    for d in test_data:
+        true_s = d[0]
+        random.shuffle(d)
+        quote_test_labels.append([s == true_s for s in d])
 
     train_data = np.concatenate(train_data).tolist()
     test_data = np.concatenate(test_data).tolist()
@@ -60,7 +70,7 @@ def quotes_dataset(data_dir, ntrain=16, seed=0):
 
     quote_train_data = [template_str.format(s=s) for s in train_data]
     quote_test_data = [template_str.format(s=s) for s in test_data]
-    return quote_train_data, quote_train_labels, quote_test_data
+    return quote_train_data, quote_train_labels, quote_test_data, quote_test_labels
 
 def extract_quote_completion(s):
     s = s.replace(";",",").split(".")[0].split("\n")[0]
